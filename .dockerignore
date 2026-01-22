@@ -1,0 +1,13 @@
+node_modules
+.next
+.git
+.gitignore
+*.log
+.DS_Store
+README.md
+TESTING.md
+GETTING_STARTED.md
+project-docs.md
+test-client.js
+quick-test.js
+.vscode
