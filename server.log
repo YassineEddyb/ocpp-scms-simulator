@@ -1,0 +1,44 @@
+
+> ocpp-csms-simulator@0.1.0 server
+> tsx server.ts
+
+> OCPP WebSocket server ready on ws://0.0.0.0:9000
+
+📘 Connect your OCPP client to: ws://localhost:9000/{chargePointId}
+
+Error: listen EADDRINUSE: address already in use :::9090
+    at <unknown> (Error: listen EADDRINUSE: address already in use :::9090)
+    at <unknown> (server.ts:52:6) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 9090
+}
+ ⨯ uncaughtException: Error: listen EADDRINUSE: address already in use :::9090
+    at <unknown> (Error: listen EADDRINUSE: address already in use :::9090)
+    at <unknown> (server.ts:52:6) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 9090
+}
+ ⨯ uncaughtException:  Error: listen EADDRINUSE: address already in use :::9090
+    at <unknown> (Error: listen EADDRINUSE: address already in use :::9090)
+    at <unknown> (server.ts:52:6) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 9090
+}
+❌ WebSocket Server Error: Error: listen EADDRINUSE: address already in use :::9000
+    at <unknown> (Error: listen EADDRINUSE: address already in use :::9000)
+    at <unknown> (server.ts:58:15) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 9000
+}

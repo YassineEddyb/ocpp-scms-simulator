@@ -32,6 +32,9 @@ class Store {
     if (this.logs.length > 1000) {
       this.logs = this.logs.slice(-1000);
     }
+    console.log(
+      `📝 Log added: ${log.chargePointId} - ${log.action} (Total: ${this.logs.length})`,
+    );
     return log;
   }
 
@@ -81,4 +84,9 @@ class Store {
   }
 }
 
-export const store = new Store();
+// Use global to ensure single instance across all modules
+declare global {
+  var __store__: Store | undefined;
+}
+
+export const store = global.__store__ ?? (global.__store__ = new Store());
