@@ -16,16 +16,49 @@ export default function SendCommandForm({ connections }: SendCommandFormProps) {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // Example payloads for each OCPP command
+  const payloadExamples: Record<string, string> = {
+    CancelReservation: '{\n  "reservationId": 1\n}',
+    ChangeAvailability: '{\n  "connectorId": 1,\n  "type": "Operative"\n}',
+    ChangeConfiguration: '{\n  "key": "HeartbeatInterval",\n  "value": "300"\n}',
+    ClearCache: '{}',
+    ClearChargingProfile: '{\n  "id": 1,\n  "connectorId": 1,\n  "chargingProfilePurpose": "TxProfile",\n  "stackLevel": 1\n}',
+    DataTransfer: '{\n  "vendorId": "VendorX",\n  "messageId": "CustomMessage",\n  "data": "Optional data"\n}',
+    GetCompositeSchedule: '{\n  "connectorId": 1,\n  "duration": 3600,\n  "chargingRateUnit": "W"\n}',
+    GetConfiguration: '{\n  "key": ["HeartbeatInterval", "MeterValueSampleInterval"]\n}',
+    GetDiagnostics: '{\n  "location": "ftp://example.com/diagnostics",\n  "retries": 3,\n  "retryInterval": 60\n}',
+    GetLocalListVersion: '{}',
+    RemoteStartTransaction: '{\n  "connectorId": 1,\n  "idTag": "TEST123"\n}',
+    RemoteStopTransaction: '{\n  "transactionId": 12345\n}',
+    ReserveNow: '{\n  "connectorId": 1,\n  "expiryDate": "2026-12-31T23:59:59Z",\n  "idTag": "TEST123",\n  "reservationId": 1\n}',
+    Reset: '{\n  "type": "Soft"\n}',
+    SendLocalList: '{\n  "listVersion": 1,\n  "updateType": "Full",\n  "localAuthorizationList": [\n    {\n      "idTag": "TEST123",\n      "idTagInfo": {\n        "status": "Accepted"\n      }\n    }\n  ]\n}',
+    SetChargingProfile: '{\n  "connectorId": 1,\n  "csChargingProfiles": {\n    "chargingProfileId": 1,\n    "stackLevel": 1,\n    "chargingProfilePurpose": "TxProfile",\n    "chargingProfileKind": "Absolute",\n    "chargingSchedule": {\n      "chargingRateUnit": "W",\n      "chargingSchedulePeriod": [\n        {\n          "startPeriod": 0,\n          "limit": 32000\n        }\n      ]\n    }\n  }\n}',
+    TriggerMessage: '{\n  "requestedMessage": "Heartbeat",\n  "connectorId": 1\n}',
+    UnlockConnector: '{\n  "connectorId": 1\n}',
+    UpdateFirmware: '{\n  "location": "ftp://example.com/firmware.bin",\n  "retrieveDate": "2026-12-31T23:59:59Z",\n  "retries": 3,\n  "retryInterval": 60\n}',
+  };
+
   const serverActions = [
+    "CancelReservation",
+    "ChangeAvailability",
+    "ChangeConfiguration",
+    "ClearCache",
+    "ClearChargingProfile",
+    "DataTransfer",
+    "GetCompositeSchedule",
+    "GetConfiguration",
+    "GetDiagnostics",
+    "GetLocalListVersion",
     "RemoteStartTransaction",
     "RemoteStopTransaction",
-    "UnlockConnector",
+    "ReserveNow",
     "Reset",
-    "ChangeConfiguration",
-    "GetConfiguration",
-    "ClearCache",
-    "ChangeAvailability",
+    "SendLocalList",
+    "SetChargingProfile",
     "TriggerMessage",
+    "UnlockConnector",
+    "UpdateFirmware",
   ];
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -85,7 +118,14 @@ export default function SendCommandForm({ connections }: SendCommandFormProps) {
         <label className="block text-sm font-medium mb-1">OCPP Command</label>
         <select
           value={action}
-          onChange={(e) => setAction(e.target.value)}
+          onChange={(e) => {
+            const newAction = e.target.value;
+            setAction(newAction);
+            // Update payload example when action changes
+            if (payloadExamples[newAction]) {
+              setPayload(payloadExamples[newAction]);
+            }
+          }}
           className="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500"
         >
           {serverActions.map((act) => (

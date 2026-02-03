@@ -98,15 +98,25 @@ Send standard OCPP 1.6 messages like:
 - FirmwareStatusNotification
 
 ### Server-to-Client (Send via UI):
+- CancelReservation
+- ChangeAvailability
+- ChangeConfiguration
+- ClearCache
+- ClearChargingProfile
+- DataTransfer
+- GetCompositeSchedule
+- GetConfiguration
+- GetDiagnostics
+- GetLocalListVersion
 - RemoteStartTransaction
 - RemoteStopTransaction
-- UnlockConnector
+- ReserveNow
 - Reset
-- ChangeConfiguration
-- GetConfiguration
-- ClearCache
-- ChangeAvailability
+- SendLocalList
+- SetChargingProfile
 - TriggerMessage
+- UnlockConnector
+- UpdateFirmware
 
 ## Usage
 
